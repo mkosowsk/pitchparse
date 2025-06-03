@@ -42,4 +42,12 @@ Thumbs.db
 
 # Project specific
 *.pdf
-*.log 
+*.log
+test.pdf
+
+# Project specific
+*.pdf
+*.log
+
+# New file to be added
+chunks.txt 

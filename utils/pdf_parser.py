@@ -1,5 +1,6 @@
 import fitz  # PyMuPDF
 from typing import Dict, List, Optional
+from llama_index.core.node_parser import SentenceSplitter
 
 class PDFParser:
     def __init__(self, file_path: str):
@@ -51,6 +52,18 @@ class PDFParser:
             "creation_date": metadata.get("creationDate", ""),
             "modification_date": metadata.get("modDate", "")
         }
+
+    def chunk_text_with_sentence_splitter(
+        self, text: str = None, chunk_size: int = 1024, chunk_overlap: int = 200
+    ) -> list:
+        """
+        Chunk text using LlamaIndex's SentenceSplitter with token constraints.
+        If text is None, extract text from the PDF.
+        """
+        if text is None:
+            text = self.extract_text()
+        splitter = SentenceSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+        return splitter.split_text(text)
 
     def __enter__(self):
         """Context manager entry."""
