@@ -49,5 +49,13 @@ test.pdf
 *.pdf
 *.log
 
+# Data files
+*.json
+*.txt
+!requirements.txt  # Don't ignore requirements.txt
+
 # New file to be added
-chunks.txt 
+chunks.txt
+
+# Ignore environment variables
+.env 

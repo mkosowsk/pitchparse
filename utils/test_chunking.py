@@ -2,7 +2,7 @@ from pdf_parser import PDFParser
 import os
 
 def main():
-    test_pdf = "test.pdf"
+    test_pdf = "test1.pdf"
     if not os.path.exists(test_pdf):
         print(f"Please place a test PDF file named '{test_pdf}' in the current directory.")
         return
@@ -14,7 +14,7 @@ def main():
             print(f"Chunk {i+1} (first 200 chars):\n{chunk[:200]}\n{'-'*40}")
         if len(chunks) > 5:
             print(f"...and {len(chunks)-5} more chunks.")
-        with open("chunks.txt", "w") as f:
+        with open("chunks1.txt", "w") as f:
             for i, chunk in enumerate(chunks):
                 f.write(f"Chunk {i+1}:\n{chunk}\n{'-'*40}\n")
 
