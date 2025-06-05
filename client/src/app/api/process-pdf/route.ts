@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     await writeFile(tempPath, buffer);
 
     // First, run the chunking script
-    const chunkingScript = join(process.cwd(), '..', 'utils', 'test_chunking.py');
+    const chunkingScript = join(process.cwd(), '..', 'server', 'test_chunking.py');
     const venvPython = join(process.cwd(), '..', 'venv', 'bin', 'python');
     console.log('Running chunking script:', chunkingScript);
     console.log('Using Python:', venvPython);
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       }
 
       // Then, run the vector store script
-      const vectorStoreScript = join(process.cwd(), '..', 'utils', 'vector_store.py');
+      const vectorStoreScript = join(process.cwd(), '..', 'server', 'vector_store.py');
       console.log('Running vector store script:', vectorStoreScript);
       
       console.log('Executing vector store script...');
@@ -82,10 +82,10 @@ export async function POST(request: NextRequest) {
       console.log('Vector store script output:', vectorStdout);
 
       // Check if company snapshot file was created
-      const snapshotPath = join(process.cwd(), '..', 'company_snapshot1.txt');
+      const companySnapshotPath = join(process.cwd(), '..', 'server', 'company_snapshot1.txt');
       let snapshotContent;
       try {
-        snapshotContent = await readFile(snapshotPath, 'utf-8');
+        snapshotContent = await readFile(companySnapshotPath, 'utf-8');
         console.log('Company snapshot file exists and is readable');
         console.log('Snapshot content:', snapshotContent);
       } catch (error) {
