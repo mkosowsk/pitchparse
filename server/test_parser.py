@@ -1,17 +1,15 @@
 from pdf_parser import PDFParser
 import os
+import sys
 
-def test_parser():
-    # Create a test PDF file path
-    test_pdf = "test.pdf"
-    
-    # Check if the test file exists
-    if not os.path.exists(test_pdf):
-        print(f"Please place a test PDF file named '{test_pdf}' in the current directory")
+def test_parser(pdf_path: str):
+    # Check if the file exists
+    if not os.path.exists(pdf_path):
+        print(f"Error: File '{pdf_path}' not found")
         return
     
     # Test the parser
-    with PDFParser(test_pdf) as parser:
+    with PDFParser(pdf_path) as parser:
         # Test text extraction
         text = parser.extract_text()
         print("\nExtracted text (first 200 chars):")
@@ -32,4 +30,8 @@ def test_parser():
         print("-" * 50)
 
 if __name__ == "__main__":
-    test_parser() 
+    if len(sys.argv) != 2:
+        print("Usage: python test_parser.py <pdf_file_path>")
+        sys.exit(1)
+    
+    test_parser(sys.argv[1]) 
